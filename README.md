@@ -29,26 +29,34 @@ This is a practical application of the XC6194A IC with USB-C connectors for VIn/
 
 ## Pinouts
 ### VIn/VOut
-- VIn or VOut
-- GND
-- USB-C Functionality Pass-Through
-- 5.1k resistors for 5v power delivery negotiation
+- USB-C connectors
+- Data Pass-Through
+- 5.1k resistors on VIn CC1 & CC2 for 5v power delivery negotiation
 ### IO
-1. VIn  - Voltage In 
-2. GND  - Ground
-3. VOut - Voltage Out
-4. SW   - Momentary Switch Input (Active LOW)
-5. PG   - Power Good Output (Active HIGH)
-6. SHDN - Shutdown Input (Active HIGH)
-### Expansion
-1. VIn  - Voltage In 
-2. GND  - Ground
-3. VOut - Voltage Out
-4. SW   - Momentary Switch Input (Active LOW)
-5. PG   - Power Good Output (Active HIGH)
-6. SHDN - Shutdown Input (Active HIGH)
+JST SH style connector, 1.0mm Pitch, 6 Position
 
-**NOTE:** All IO/Expansion pins operate at VIn level. If the XC6194A IO are connected to an MCU, please verify voltage compatability or utilize one of the optional Micro Foundry XC6194A expansion PCBs.
+| Pin | Function | Description | XC6194A IO |
+| --- | -------- | ----------- | ---------- |
+| 1 | VIn | XC6194A Voltage In | |
+| 2 | GND | Ground | |
+| 3 | VOut | XC6194A Switched Voltage Out | |
+| 4 | SW | XC6194A Momentary Switch | Input (Active LOW) |
+| 5 | PG | XC6194A Power Good | Output (Active HIGH) |
+| 6 | SHDN | XC6194A Shutdown | Input (Active HIGH) |
+
+**NOTE:** All IO/Expansion pins operate at VIn level. If the XC6194A IO are connected to an MCU, please verify voltage compatibility or utilize one of the optional Micro Foundry XC6194A expansion PCBs.
+
+### Expansion
+FFC ZIF connector with backlock, 1.0mm Pitch, 6 Position. Pinout is the same as the IO port above.
+
+**NOTE:** The FFC connector is a bottom/top common contact design. I.e., there will be power and IO signals present regardless of which orientation the FFC jumper is inserted. Please exercise caution when connecting external devices and double check pin-to-pin mapping.
+
+### Additional IO Pin Info
+Basic XC6194A functionality can be achived utilizing the IO connector.
+- SW Pin: When wired to a N.O. (normally open) momentary switch with the other switch leg connected to GND, pressing the switch will avtivate the XC6194A's internal mosfet and deliver power to VOut. Pressing the switch for the required Turn-Off Delay will turn off the XC6194A. The XC6194A Breakout has the required pull-up resistor on the SW circuit. 
+- PG Pin: The Power Good Output is traditionally utilized to enable a downstream power supply with an Active High Enable input. Within the XC6194 functional logic, the PG pin state is controlled by the On/Off, Short Circuit Protection, Thermal Shut Down, and Soft Start logic blocks. The XC6194A Breakout has the required pull-up resistor on the VOut circuit.
+- SHDN Pin: A HIGH signal on this input will trigger an immediate shut down, VOut will be disconnected and PG will be pulled low.
+- VOut: The breakout circuit contains a 0 Ohm (Zero) series resistor allowing this Output to be utilized with a LED, such as a single color LED momentary switch. The resistor can be replaced with one of an appropriate value if current control is required.
 
 ## XC6194A Breakout PCB Variants
 - [Micro Foundry XC6194A JST PH Style Breakout PCB](https://github.com/microfoundry/MicroFoundry-XC6194A-PH-Breakout-PCB)
