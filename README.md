@@ -1,12 +1,15 @@
 # MicroFoundry-XC6194A-USB-C-Breakout-PCB
 Information about the XC6194A Breakout with USB-C connectors.
 
+## Why?
+I wanted to utilize one of those good looking Rugged Metal RGB Momentary Switches like [adafruit sells](https://www.adafruit.com/product/3350) in another project. "Momentary" is cool as it provides a nice clean flush look, but not very condusive for powering On/Off a system. I tossed around a couple differnt ideas on latching circuits and then I stumbled across the TOREX XC6194 IC. Bam - sold! 
+
 ## XC6194 Description
 The TOREX XC6194A series device is a high side load switch rated at 1A/5Vdc. Its most unique feature is the ability to latch "On" the signal from a momentary push button and additional features to enhance battery operated devices.
 
 The built-in high side switch is turned on and latched by inputting LOW level signal from a momentary switch to the SW (Switch) pin. It is turned off by a HIGH level signal into the SHDN (Shutdown) pin from the MCU or the like. Optionally, power-off state can be achieved with the XC6194A series by inputting a continuous LOW level signal to the SW pin for the duration of TOFFD (Turn-Off Delay).
 
-When the SW and SHDN signals are wired to MCU IO, with a short tap of the SW signal, end-user developed code can cleanly close connections, stop processes and then output the required SHDN signal when appropriate. Additionally, the Turn-Off Delay functionality offers a fail-safe option to power down.
+When the SW and SHDN signals are wired to MCU IO, with a short tap of the SW signal, end-user developed code can cleanly close connections, stop processes and then output the required SHDN signal when appropriate. Additionally, the Turn-Off Delay functionality offers the option to force power down.
 
 ## XC6194 Features
 
